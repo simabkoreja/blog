@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Blog;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogCreateRequest;
+use App\Http\Requests\BlogUpdateRequest;
 
 class BlogController extends Controller
 {
@@ -51,7 +52,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        abort_if(auth()->user()->role != 'admin' && auth()->id() != $blog->id, 401);
+        abort_if(auth()->user()->role != 'admin' && auth()->id() != $blog->user_id, 401);
 
         return view('blogs.edit',compact('blog'));
     }
@@ -65,7 +66,7 @@ class BlogController extends Controller
      */
     public function update(BlogUpdateRequest $request, Blog $blog)
     {
-        abort_if(auth()->user()->role != 'admin' && auth()->id() != $blog->id, 401);
+        abort_if(auth()->user()->role != 'admin' && auth()->id() != $blog->user_id, 401);
 
         $fileName = '';
         if ($file = $request->file('image')) {
@@ -97,7 +98,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        abort_if(auth()->user()->role != 'admin' && auth()->id() != $blog->id, 401);
+        abort_if(auth()->user()->role != 'admin' && auth()->id() != $blog->user_id, 401);
 
         $blog->delete();
         return redirect('/')->with('success', 'Blog deleted successfully!');

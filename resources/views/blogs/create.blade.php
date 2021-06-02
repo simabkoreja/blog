@@ -66,24 +66,28 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-sm-6">
+                            <div class="form-group col-sm-6 @error('is_active') form-control is-invalid @enderror">
                                 <label for="is_active"
                                     class="col-form-label text-md-right">{{ __('Is Active?') }}</label>
 
-                                <label for="is_active1">
-
-                                    <input type="radio" name="is_active" id="is_active1" value="1"> Yes
-                                </label>
-                                <label for="is_active2">
-
-                                    <input type="radio" name="is_active" id="is_active2" value="0"> No
-                                </label>
-
-                                @error('is_active')
-                                <span class="" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" name="is_active" id="is_active1" class="form-check form-check-input" value="1">
+                                        <label for="is_active1" class="form-check-label @error('is_active') is-invalid @enderror">Yes</label>
+                                        @error('is_active')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" name="is_active" id="is_active2" class="form-check form-check-input" value="0">
+                                    <label for="is_active2" class="form-check-label @error('is_active') is-invalid @enderror">No</label>
+                                    @error('is_active')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-group col-sm-6">
                                 <label for="image"

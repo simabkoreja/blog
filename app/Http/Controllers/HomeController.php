@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         $blogs = Blog::where('is_active', 1)
-            ->where('start_date', '>=', date('Y-m-d'));
+            ->where('end_date', '>=', date('Y-m-d'));
 
         if (auth()->check() && auth()->user()->role == 'user') {
 
